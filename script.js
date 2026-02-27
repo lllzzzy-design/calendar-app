@@ -39,3 +39,27 @@ function deleteTask(index) {
 }
 
 renderTasks();
+if ("Notification" in window) {
+    Notification.requestPermission();
+}
+setInterval(checkReminders, 60000);
+
+function checkReminders() {
+    const now = new Date();
+
+    tasks.forEach(task => {
+        const taskTime = new Date(task.date);
+
+        if (
+            now.getFullYear() === taskTime.getFullYear() &&
+            now.getMonth() === taskTime.getMonth() &&
+            now.getDate() === taskTime.getDate() &&
+            now.getHours() === taskTime.getHours() &&
+            now.getMinutes() === taskTime.getMinutes()
+        ) {
+            new Notification("提醒", {
+                body: task.text
+            });
+        }
+    });
+}

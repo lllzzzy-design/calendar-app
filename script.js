@@ -63,3 +63,4 @@ function checkReminders() {
         }
     });
 }
+new Notification("测试通知", { body: "如果你看到这个，说明通知功能正常" });

@@ -17,6 +17,9 @@ function renderTasks() {
 }
 
 function addTask() {
+    if ("Notification" in window && Notification.permission !== "granted") {
+    Notification.requestPermission();
+}
     const text = document.getElementById("taskInput").value;
     const date = document.getElementById("dateInput").value;
 
@@ -39,9 +42,6 @@ function deleteTask(index) {
 }
 
 renderTasks();
-if ("Notification" in window) {
-    Notification.requestPermission();
-}
 setInterval(checkReminders, 60000);
 
 function checkReminders() {
